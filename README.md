@@ -1,6 +1,6 @@
 # cooksy
 
-A new Flutter project.
+Cooksy is a cooking recipe app
 
 ## Getting Started
 

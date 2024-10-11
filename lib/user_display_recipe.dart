@@ -46,7 +46,7 @@ class _UserDispState extends State<UserDisp> {
           }
         },
         tooltip: "Add Recipe",
-        child: Icon(Icons.add,color: Color(0xFFEE3625),),
+        child: const Icon(Icons.add,color: Color(0xFFEE3625),),
       ),
     );
   }

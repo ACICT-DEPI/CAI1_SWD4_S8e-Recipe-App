@@ -1,12 +1,9 @@
+import 'package:cooksy/favorites_page.dart';
 import 'package:cooksy/profile_page.dart';
 import 'package:cooksy/search_page.dart';
 import 'package:cooksy/user_add_recipe.dart';
 import 'package:flutter/material.dart';
-import 'package:cooksy/recipe_view_page.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dio_helper.dart';
-import 'favorites_page.dart';
 
 class RecipeMenu extends StatefulWidget {
   const RecipeMenu({super.key});
@@ -19,91 +16,86 @@ class _MenuViewState extends State<RecipeMenu> {
   List<String> categories = [];
   List<Map<String, String>> meals = [];
   int _selectedIndex = 0;
-  Set<String> favoriteMeals = {};
-  Map<String, double> mealRatings = {};
-  bool isLoading = true;
+  Set<String> favoriteMeals = <String>{};
+  Map<String, double> mealRatings = {}; // Map to store meal ratings
+  bool isLoading = true; // To show loading indicator
 
   final List<Widget> _pages = [
-    const RecipeMenu(), // Replace with the actual page for recipes
-    const SearchPage(),
-    UserAdd(onRecipeAdded: (Recipe) { /* handle added recipe */ }),
-    const FavoritesPage(),
-    const ProfilePage(),
+    // Replace with your actual pages
+    RecipeMenu(), // This should probably be replaced with another page
+    SearchPage(),
+    UserAdd(onRecipeAdded: (recipe) {
+      // Handle recipe added
+    }),
+    FavoritesPage(),
+    ProfilePage(),
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     fetchCategories();
-    loadFavorites();
+    loadFavorites(); // Load favorites when the app starts
   }
 
-  // Fetch categories from the API
   void fetchCategories() async {
-    // Your fetching logic here
+    // Implement your logic to fetch categories from your data source
+    // Simulating a delay for fetching data
+    await Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        categories = ['Breakfast', 'Lunch', 'Dinner']; // Example categories
+        isLoading = false; // Set loading to false after fetching
+      });
+    });
   }
 
-  // Load favorite meals from SharedPreferences
   void loadFavorites() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      favoriteMeals = prefs.getStringList('favorites')?.toSet() ?? {};
-    });
+    final prefs = await SharedPreferences.getInstance();
+    // Load favorites from SharedPreferences
+    // Example: favoriteMeals = prefs.getStringList('favorites')?.toSet() ?? {};
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            top: BorderSide(color: Colors.grey.shade300, width: 1),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator()) // Show loading indicator
+          : _pages[_selectedIndex], // Display the selected page
+
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant_menu),
+            label: 'Menu',
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          child: GNav(
-            rippleColor: Colors.grey[300]!,
-            hoverColor: Colors.grey[100]!,
-            gap: 8,
-            activeColor: const Color(0xfffee3625),
-            iconSize: 24,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            duration: const Duration(milliseconds: 400),
-            tabBackgroundColor: const Color(0xfffee3625).withOpacity(0.1),
-            color: Colors.grey[800],
-            tabs: const [
-              GButton(
-                icon: Icons.restaurant_menu,
-                text: 'Recipes',
-              ),
-              GButton(
-                icon: Icons.search,
-                text: 'Search',
-              ),
-              GButton(
-                icon: Icons.add,
-                text: 'Add Recipe',
-              ),
-              GButton(
-                icon: Icons.favorite,
-                text: 'Favorites',
-              ),
-              GButton(
-                icon: Icons.person,
-                text: 'Profile',
-              ),
-            ],
-            selectedIndex: _selectedIndex,
-            onTabChange: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle),
+            label: 'Add Recipe',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        selectedItemColor: Color(0xFFEE3625),
+        unselectedItemColor: Colors.grey,
       ),
     );
   }

@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyArWItM1qW8YLNB6azHZni1G7bhcB5eosU',
-    appId: '1:517301158382:android:605eacb9ea3f7eba938eff',
+    appId: '1:517301158382:android:907e68285d022056938eff',
     messagingSenderId: '517301158382',
     projectId: 'cooksy-a54c9',
     storageBucket: 'cooksy-a54c9.appspot.com',
@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD7ndHX69udTBr7fG5WidSwqH-WI7DrzOA',
-    appId: '1:517301158382:ios:ee9f0b0066d6df6d938eff',
+    appId: '1:517301158382:ios:2dfc8ab260c6a7e7938eff',
     messagingSenderId: '517301158382',
     projectId: 'cooksy-a54c9',
     storageBucket: 'cooksy-a54c9.appspot.com',
+    iosClientId: '517301158382-l7or1hpj3vd9tcq3mvohgihf5dkppu84.apps.googleusercontent.com',
     iosBundleId: 'com.example.cooksy',
   );
 }

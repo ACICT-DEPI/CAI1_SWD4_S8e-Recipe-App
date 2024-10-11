@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "517301158382",
+    "project_id": "cooksy-a54c9",
+    "storage_bucket": "cooksy-a54c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517301158382:android:907e68285d022056938eff",
+        "android_client_info": {
+          "package_name": "com.example.cooksy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517301158382-l8kt3ie89v6f2820qlc6so1iu8keofkm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArWItM1qW8YLNB6azHZni1G7bhcB5eosU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517301158382-l8kt3ie89v6f2820qlc6so1iu8keofkm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "517301158382-l7or1hpj3vd9tcq3mvohgihf5dkppu84.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cooksy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
